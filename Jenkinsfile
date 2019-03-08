@@ -17,7 +17,7 @@ node('k8s-slave') {
     stage('terraform-plan-apply') {
         withCredentials([[
             $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: 'rnd',
+            credentialsId: 'aws_rnd',
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
