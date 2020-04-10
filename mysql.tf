@@ -39,3 +39,24 @@ variable "dbusers" {
   type    = list(string)
   default = ["api-gateway", "auth-service", "connectivity-service", "cron-service", "data-gateway", "data-service", "inventory-service", "integration-service", "mellarius", "mellarius-v2", "template-service", "user-service"]
 }
+
+### Example of dynamic block in resource
+        ip_configuration {
+            private_network = google_compute_network.ak-core-vpc.self_link
+            ipv4_enabled = true
+            dynamic authorized_networks {
+              for_each = var.ip_whitelist
+
+              content {
+                name  = authorized_networks.key
+                value = authorized_networks.value
+              }
+            }           
+        }
+
+variable "ip_whitelist" {
+  type = map(string)
+  default = {
+      Belgrade-office = "82.214.86.83/32"
+  }
+}
