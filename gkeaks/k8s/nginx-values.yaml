@@ -1,0 +1,26 @@
+controller:
+  config:
+    ## The entries of the ConfigMap for customizing NGINX configuration.
+    entries:
+      stream-snippets: |
+        upstream mqtt-broker-internal { 
+          server mqtt-broker-internal.ak-core.svc:1883;
+        }
+        server {
+          listen 1883;
+          proxy_pass mqtt-broker-internal;
+        }
+        server {
+          listen 8883;
+          proxy_pass mqtt-broker-internal;
+        }
+  service:
+    customPorts:
+      - protocol: TCP
+        port: 1883
+        targetPort: 1883
+        name: mqtt
+      - protocol: TCP
+        port: 8883
+        targetPort: 8883
+        name: mqtt-ssl

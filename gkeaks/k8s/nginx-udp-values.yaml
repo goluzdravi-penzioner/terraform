@@ -1,0 +1,25 @@
+controller:
+  ingressClass: "coap"
+  useIngressClassOnly: true
+  config:
+    entries:
+      stream-snippets: |
+        upstream coap-gateway-internal {
+          server coap-gateway-internal.ak-core.svc:5683;
+        }
+
+        server {
+          listen 5683 udp;
+          proxy_pass coap-gateway-internal;
+        }
+  service:
+    httpPort:
+      enable: false
+    httpsPort:
+      enable: false
+    customPorts:
+      - protocol: UDP
+        port: 5683
+        targetPort: 5683
+        name: coap-udp
+  enableCustomResources: false

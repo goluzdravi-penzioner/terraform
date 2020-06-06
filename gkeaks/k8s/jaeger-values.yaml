@@ -1,0 +1,17 @@
+image:
+  tag: 1.17.0
+
+jaeger:
+  # Specifies whether Jaeger instance should be created
+  create: true
+  spec:
+    ingress:
+      enabled: false
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

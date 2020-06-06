@@ -1,0 +1,48 @@
+prometheus:
+  additionalServiceMonitors:
+    ## Name of the ServiceMonitor to create
+    ##
+    - name: "k8s-apps-http"
+      ## Additional labels to set used for the ServiceMonitorSelector. Together with standard labels from
+      ## the chart
+      ##
+      # additionalLabels: {}
+
+      ## Service label for use in assembling a job name of the form <label value>-<port>
+      ## If no label is specified, the service name is used.
+      ##
+      jobLabel: "k8s-apps"
+      ## labels to transfer from the kubernetes service to the target
+      ##
+      targetLabels: ["app"]
+
+      ## Label selector for services to which this ServiceMonitor applies
+      ##
+      selector:
+        matchExpressions:
+          - { key: app, operator: Exists }
+      ## Namespaces from which services are selected
+      ##
+      namespaceSelector:
+        ## Match any namespace
+        ##
+        any: false
+        ## Explicit list of namespace names to select
+        ##
+        matchNames: ["ak-core"]
+      ## Endpoints of the selected service to be monitored
+      ##
+      endpoints:
+        ## Name or number of the endpoint's target port
+        ##
+        - targetPort: "8880"
+          ## Interval at which metrics should be scraped
+          ##
+          interval: 30s
+
+          ## HTTP path to scrape for metrics
+          ##
+          path: /actuator/metrics
+          ## HTTP scheme to use for scraping
+          ##
+          scheme: http

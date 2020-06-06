@@ -1,0 +1,18 @@
+keycloak:
+  #TODO mount from config map
+  #https://github.com/codecentric/helm-charts/tree/master/charts/keycloak
+  #https://www.keycloak.org/getting-started/getting-started-kube
+  #https://github.com/keycloak/keycloak/tree/master/examples/broker/google-authentication
+  #https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1
+  extraVolumes: |
+    - name: realm-secret
+
+      secret:
+        secretName: realm-secret
+
+  extraVolumeMounts: |
+    - name: realm-secret
+      mountPath: "/realm/"
+      readOnly: true
+
+  extraArgs: -Dkeycloak.import=/realm/realm.json

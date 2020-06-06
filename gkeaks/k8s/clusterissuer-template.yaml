@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    #NOTE let's encrypt staging env produces an untrusted certificate which is not a viable option for any of our envs
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: devops@akenza.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      - dns01:
+          cnameStrategy: Follow
+          cloudflare:
+            email: devops@akenza.com
+            apiKeySecretRef:
+              name: cloudflare-api-key-secret
+              key: api-key
+---
+#TODO move this to terraform code
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-api-key-secret
+  namespace: cert-manager
+type: Opaque
+stringData:
+  api-key: ${cloudflare_apikey}
