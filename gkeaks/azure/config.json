@@ -1,9 +1,9 @@
 {
   "auths": {
-    "https://akenzaazuremarketplace.azurecr.io": {
-      "username": "2f499b38-0000b-0000-942b-afef5a7ff9a8",
-      "password": "0a26ad15-0000-0000-b784-55992fa6c02d",
-      "auth": "000000000MzgtMDc1Yi00NTUwLTk0MmItYWZlZjVhN2ZmOWE4OjBhMjZhZDE1LTBjNTItNDM1MS1iNzg0LTU1OTkyZmE2YzAyZA=="
+    "https://demoazuremarketplace.azurecr.io": {
+      "username": "2f499b38-0000b-0000-942b-0000000000",
+      "password": "0a26ad15-0000-0000-b784-00000000000",
+      "auth": "000000000MzgtMDc1Yi00NTUwLTk0MmItYWZlZjVhN2ZmOWE4OjBhMjZhZDE1LTBjNTItNDM1MS1iNzg0LTU1OTky0000000000=="
     }
   }
 }
