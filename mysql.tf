@@ -57,6 +57,6 @@ variable "dbusers" {
 variable "ip_whitelist" {
   type = map(string)
   default = {
-      Belgrade-office = "82.214.86.83/32"
+      office = var.ip
   }
 }
